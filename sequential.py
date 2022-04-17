@@ -85,15 +85,13 @@ class Sequential:
             if run:
                 self.reset()
                 res = self.run_algorithm()
-            try: # issues with workers not terminating due to queue
+            try:
                 q.put(res, False)
                 run = True
             except queue.Full:
                 run = False
                 time.sleep(.01)
-                #print('Queue Full.')
         stop.value = 0
-        #iprint('sim done')
 
     def wipe_node_samples(self, nodes:list) -> None:        
         self.samples[nodes] = 0
@@ -245,8 +243,6 @@ class Sequential:
 
     @register_algorithm(knows_anom_param=False, hierarchical=False)
     def DS(self) -> dict:
-        #if self.board.dist == 'REAL':
-            #self.board.min_sigma = [.05 for _ in range(self.board.levels)]
         # initial estimate = normal parameter
         est = [self.board.normal_parameter(1) for _ in range(self.board.size)]
         llr = np.zeros(self.board.size)
@@ -281,8 +277,6 @@ class Sequential:
                     if self.lgllr:
                         llr[borderline] = self.board.logp(est[borderline],borderline,self.current_samples(borderline))\
                             -self.board.logp('0',borderline,self.current_samples(borderline))
-                #if t>500:
-                #print(t)
                 est_anoms.remove(borderline)
 
             # phase 1
@@ -303,9 +297,6 @@ class Sequential:
                 if logp != logp_denominator: # problems at infinity...
                     llr[m] += logp-logp_denominator
             est[m], new_state = self.board.est_leaf(False, self.current_samples(m))
-            #print(self.current_samples(m),self.board.min_samples,est[m])
-            #print(self.n[m],self.board.min_samples)
-            #exit()
             if self.lgllr:
                 llr[m] = self.board.logp(est[m],m,self.current_samples(m))\
                     -self.board.logp('0',m,self.current_samples(m))

@@ -298,8 +298,6 @@ class Board:
             return est, anom
         elif self.dist == 'REAL':
             sigma = np.sqrt(np.mean((samples-mean)**2))
-            #print(samples,sigma)
-            #exit()
             sigma = max(sigma, self.min_sigma[0])
             return np.array([mean, sigma]), mean<self.mumid[0] and sigma < self.sigmamid[0]
         else:
