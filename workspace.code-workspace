@@ -1,0 +1,37 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Python",
+				"type": "python",
+				"request": "launch",
+				"program": "${file}",
+				"console": "integratedTerminal",
+				"cwd": "${fileDirname}"
+			},
+			{
+				"name": "Python2",
+				"type": "python",
+				"request": "launch",
+				"program": "${file}",
+				"console": "integratedTerminal",
+				"cwd": "${fileDirname}"
+			},
+			{
+				"name": "Plot",
+				"type": "python",
+				"request": "launch",
+				"program": "plot.py",
+				"console": "integratedTerminal",
+				"cwd": "${fileDirname}"
+			}
+		]
+	}
+}
