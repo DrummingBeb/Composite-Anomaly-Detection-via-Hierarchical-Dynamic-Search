@@ -77,8 +77,6 @@ if __name__ == '__main__':
         elif 'multi' in args.algorithm:
             args.dist = 'EXP'
             args.anomaly_parameter = 1e3
-            if 'DS' in args.algorithm:
-                args.max_samples = round(1e3)
             args.n_anom = 5
             r = 'multi'
         elif 'real' in args.algorithm:
